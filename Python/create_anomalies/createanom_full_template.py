@@ -39,7 +39,7 @@ for e in range(1, nens+1):
                                 autoclose=True))
 ds = xr.concat(_l, dim='M')
 # Drop 1 dimensional coordinates
-ds = ds.squeeze()
+ds = ds.sel(Y=slice(y0, y1), X=slice(x0, x1)).squeeze()
 # Obtain data varialbe
 da = ds[va]
 

@@ -16,6 +16,12 @@ subsampleS=1 # 0, 1
 startS=1999-01-07 # YYYY-MM-DD
 endS=2014-12-28 # YYYY-MM-DD
 
+x0=180
+x1=360
+y0=90
+y1=0
+
+
 # Remove any files previously created
 rm -rf create_full_climatology.py
 
@@ -30,6 +36,10 @@ cat createclim_full_template.py\
 | sed 's/subsampleS/'${subsampleS}'/g'\
 | sed 's/startS/'${startS}'/g'\
 | sed 's/endS/'${endS}'/g'\
+| sed 's/x0/'${x0}'/g'\
+| sed 's/x1/'${x1}'/g'\
+| sed 's/y0/'${y0}'/g'\
+| sed 's/y1/'${y1}'/g'\
 > create_full_climatology.py
 
 # This section submits the python scripts on a HPC.

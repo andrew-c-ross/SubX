@@ -38,7 +38,7 @@ for e in range(1, nens+1):
     _l.append(xr.open_mfdataset(ddir+'*.'+ens+'.nc',autoclose=True))
 ds = xr.concat(_l, dim='M')
 # Drop 1 dimensional coordinates
-ds = ds.squeeze()
+ds = ds.sel(Y=slice(y0, y1), X=slice(x0, x1)).squeeze()
 # Obtain data varialbe
 da = ds[va]
 
@@ -47,7 +47,7 @@ if 1 == subsampletime:
     da = da.sel(S=slice(starttime, endtime))
 else:
     starttime = pd.Timestamp(da.S.values[0]).strftime('%Y-%m-%d')
-    endtime = pd.Timestamp(da.S.values[-1]).strftime('%Y-%m-%d') 
+    endtime = pd.Timestamp(da.S.values[-1]).strftime('%Y-%m-%d')
 # Update save file same
 climfname = starttime+'.'+endtime+'.'+climfname
 sclimfname = starttime+'.'+endtime+'.'+sclimfname
